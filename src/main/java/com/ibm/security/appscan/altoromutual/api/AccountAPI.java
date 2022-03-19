@@ -19,6 +19,8 @@ import com.ibm.security.appscan.altoromutual.model.User;
 import com.ibm.security.appscan.altoromutual.util.DBUtil;
 import com.ibm.security.appscan.altoromutual.util.OperationsUtil;
 
+import static com.ibm.security.appscan.altoromutual.model.Account.getAccount;
+
 
 @Path("/account")
 public class AccountAPI extends AltoroAPI {
@@ -63,7 +65,7 @@ public class AccountAPI extends AltoroAPI {
 		// not checking the account number, side privilege escalation possible
 		try {
 			// Get the account balance
-			double dblBalance = Account.getAccount(accountNo).getBalance();
+			double dblBalance = getAccount(accountNo).getBalance();
 			String format = (dblBalance < 1) ? "$0.00" : "$.00";
 			String balance = new DecimalFormat(format).format(dblBalance);
 			response = "{\"balance\" : \"" + balance + "\" ,\n";

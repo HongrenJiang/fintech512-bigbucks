@@ -19,6 +19,7 @@ package com.ibm.security.appscan.altoromutual.model;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import org.apache.commons.codec.binary.Base64;
@@ -33,6 +34,7 @@ public class Account {
 	private long accountId = -1;
 	private String accountName = null;
 	private double balance = -1;
+	private List<Stock> portfolio;
 	
 	public static Account getAccount(String accountNo) throws SQLException {
 		if (accountNo == null || accountNo.trim().length() == 0)
