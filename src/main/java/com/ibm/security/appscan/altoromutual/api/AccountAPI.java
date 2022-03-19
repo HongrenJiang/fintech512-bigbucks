@@ -192,8 +192,9 @@ public class AccountAPI extends AltoroAPI {
 			response += "{\"id\":" + "\"" + transactions[i].getTransactionId()
 					+ "\"," + "\"date\":" + "\"" + date + "\","
 					+ "\"account\":\"" + transactions[i].getAccountId() + "\","
-					+ "\"type\":\"" + transactions[i].getTransactionType()+
-					"\"," + "\"amount\":\"" + amount + "\"}";
+					+ "\"type\":\"" + transactions[i].getTransactionType() + "\","
+					+ "\"stock\":\"" + transactions[i].getStock() + "\","
+					+ "\"amount\":\"" + amount + "\"}";
 			if(i<transactions.length-1) response+=",";
 		}
 		response += "]}";

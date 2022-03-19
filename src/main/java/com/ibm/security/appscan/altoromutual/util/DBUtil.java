@@ -414,8 +414,9 @@ public class DBUtil {
 				long actId = resultSet.getLong("ACCOUNTID");
 				Timestamp date = resultSet.getTimestamp("DATE");
 				String desc = resultSet.getString("TYPE");
+				String stock = resultSet.getString("STOCK");
 				double amount = resultSet.getDouble("AMOUNT");
-				transactions.add(new Transaction(transId, actId, date, desc, amount));
+				transactions.add(new Transaction(transId, actId, date, desc, stock, amount));
 			}
 			
 			return transactions.toArray(new Transaction[transactions.size()]); 

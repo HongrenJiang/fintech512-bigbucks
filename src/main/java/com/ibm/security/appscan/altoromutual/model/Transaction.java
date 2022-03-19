@@ -30,13 +30,16 @@ public class Transaction {
 	private int transactionId;
 	private long accountId;
 	private String transactionType;
+	private String stock;
 	private double amount;
 	private Date date;
 	
-	public Transaction(int transactionId, long accountId, Date date, String transactionType, double amount) {
+	public Transaction(int transactionId, long accountId, Date date, String transactionType, String stock,
+					   double amount) {
 		this.accountId = accountId;
 		this.amount = amount;
 		this.transactionId = transactionId;
+		this.stock = stock;
 		this.transactionType = transactionType;
 		this.date = date;
 	}
@@ -51,6 +54,10 @@ public class Transaction {
 
 	public String getTransactionType() {
 		return transactionType;
+	}
+
+	public String getStock() {
+		return stock;
 	}
 
 	public double getAmount() {
