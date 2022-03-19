@@ -32,12 +32,14 @@ public class Transaction {
 	private String transactionType;
 	private String stock;
 	private double amount;
+	private int stockAmount;
 	private Date date;
 	
 	public Transaction(int transactionId, long accountId, Date date, String transactionType, String stock,
-					   double amount) {
+					   double amount, int stockAmount) {
 		this.accountId = accountId;
 		this.amount = amount;
+		this.stockAmount = stockAmount;
 		this.transactionId = transactionId;
 		this.stock = stock;
 		this.transactionType = transactionType;
@@ -62,6 +64,10 @@ public class Transaction {
 
 	public double getAmount() {
 		return amount;
+	}
+
+	public int getStockAmount() {
+		return stockAmount;
 	}
 
 	public Date getDate() {

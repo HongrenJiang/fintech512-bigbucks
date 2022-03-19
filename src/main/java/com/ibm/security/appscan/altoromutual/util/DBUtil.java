@@ -416,7 +416,8 @@ public class DBUtil {
 				String desc = resultSet.getString("TYPE");
 				String stock = resultSet.getString("STOCK");
 				double amount = resultSet.getDouble("AMOUNT");
-				transactions.add(new Transaction(transId, actId, date, desc, stock, amount));
+				int stockAmount = resultSet.getInt("STOCKAMOUNT");
+				transactions.add(new Transaction(transId, actId, date, desc, stock, amount, stockAmount));
 			}
 			
 			return transactions.toArray(new Transaction[transactions.size()]); 
