@@ -225,29 +225,7 @@ public class DBUtil {
 		}
 		return false;
 	}
-
-	/**
-	 * Check for existing user
-	 * @param user username
-	 * @return true if exsiting user, false otherwise
-	 * @throws SQLException
-	 */
-	public static boolean isExistingUser(String user) throws SQLException{
-		if (user == null || user.trim().length() == 0)
-			return false;
-
-		Connection connection = getConnection();
-		Statement statement = connection.createStatement();
-
-		ResultSet resultSet =statement.executeQuery("SELECT COUNT(*)FROM PEOPLE WHERE USER_ID = '"+ user +"'");
-
-		if (resultSet.next()){
-
-			if (resultSet.getInt(1) > 0)
-				return true;
-		}
-		return false;
-	}
+	
 
 	/**
 	 * Get user information

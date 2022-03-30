@@ -41,10 +41,6 @@ public class Log4AltoroJ {
         logger.info(message);
     }
 
-    public void registerError(String error){
-        logger.error(error);
-    }
-
     public String getLogFileLocation(){
         return logFileLocation;
     }
