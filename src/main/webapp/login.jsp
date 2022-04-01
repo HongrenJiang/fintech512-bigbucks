@@ -54,6 +54,7 @@ IBM AltoroJ
 		      <td>
 		      </td>
 		    </tr>
+
 		    <tr>
 		      <td>
 		        Password:
@@ -62,12 +63,20 @@ IBM AltoroJ
 		        <input type="password" id="passw" name="passw" style="width: 150px;">
 		        </td>
 		    </tr>
+
 		    <tr>
 		        <td></td>
 		        <td>
 		          <input type="submit" name="btnSubmit" value="Login">
 		        </td>
-		      </tr>
+			</tr>
+
+			<tr>
+				<td></td>
+				<td>
+					<a href="signup.jsp">Signup</a>
+				</td>
+			</tr>
 		  </table>
 		</form>
 		
