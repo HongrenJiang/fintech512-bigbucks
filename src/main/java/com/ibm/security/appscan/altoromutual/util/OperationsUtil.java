@@ -38,32 +38,28 @@ public class OperationsUtil {
 	
 	public static String doServletTransfer(HttpServletRequest request, long creditActId, String accountIdString,
 			double amount) {
-		
-		long debitActId = 0;
 
+		long debitActId = 0;
 		User user = ServletUtil.getUser(request);
 		String userName = user.getUsername();
-		
 		try {
 			Long accountId = -1L;
 			Cookie[] cookies = request.getCookies();
 			
 			Cookie altoroCookie = null;
-			
+
 			for (Cookie cookie: cookies){
 				if (ServletUtil.ALTORO_COOKIE.equals(cookie.getName())){
 					altoroCookie = cookie;
 					break;
 				}
 			}
-			
+
 			Account[] cookieAccounts = null;
 			if (altoroCookie == null)
 				cookieAccounts = user.getAccounts();			
 			else
 				cookieAccounts = Account.fromBase64List(altoroCookie.getValue());
-			
-			
 			
 			try {
 				accountId = Long.parseLong(accountIdString);
@@ -88,10 +84,9 @@ public class OperationsUtil {
 			}
 			
 		} catch (Exception e){
-			//do nothing
 		}
 		
-		//we will not send an error immediately, but we need to have an indication when one occurs...
+		//no error sent until one occurs
 		String message = null;
 		if (creditActId < 0){
 			message = "Destination account is invalid";
@@ -101,9 +96,8 @@ public class OperationsUtil {
 			message = "Transfer amount is invalid";
 		}
 		
-		//if transfer amount is zero then there is nothing to do
+		//no info provided
 		if (message == null && amount > 0){
-			//Notice that available balance is not checked
 			message = DBUtil.transferFunds(userName, creditActId, debitActId, amount);
 		}
 		
@@ -115,6 +109,30 @@ public class OperationsUtil {
 		
 		return message;
 	}
+	public static String doServletTradeStock(HttpServletRequest request, long creditActId, double amount) {
+
+		User user = ServletUtil.getUser(request);
+		String userName = user.getUsername();
+		//no error sent until one occurs
+		String message = null;
+		if (creditActId < 0){
+			message = "Destination account is invalid";
+		}
+
+		//if transfer amount is zero, no info can be provided
+		if (message == null){
+			message = DBUtil.transferStock(userName, creditActId, amount);
+		}
+
+		if (message != null){
+			message = "ERROR: " + message;
+		} else {
+			message = amount + " was successfully post to Account " + creditActId + " at " + new SimpleDateFormat().format(new Date()) + ".";
+		}
+
+		return message;
+	}
+
 
 	public static String sendFeedback(String name, String email,
 			String subject, String comments) {

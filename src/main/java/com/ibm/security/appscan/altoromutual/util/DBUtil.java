@@ -358,15 +358,51 @@ public class DBUtil {
 		}
 	}
 
+	public static String transferStock(String username, long accountId, double amount) {
+
+		try {
+
+			User user = getUserInfo(username);
+
+			Connection connection = getConnection();
+			Statement statement = connection.createStatement();
+
+			Account AccountID = Account.getAccount(accountId);
+
+			if (AccountID == null)
+				return "Destination account is invalid";
+
+			java.sql.Timestamp date = new Timestamp(new java.util.Date().getTime());
+
+			long userCC = user.getCreditCardNumber();
+
+			if(amount > 0)
+			{
+				double creditAmount = amount;
+				statement.execute("INSERT INTO TRANSACTIONS (ACCOUNTID, DATE, TYPE, AMOUNT) VALUES ("+AccountID.getAccountId()+",'"+date+"',"+((AccountID.getAccountId() == userCC)?"'Payment'":"'Deposit'")+","+creditAmount+")");
+				statement.execute("UPDATE ACCOUNTS SET BALANCE = " + (AccountID.getBalance()+creditAmount) + " WHERE ACCOUNT_ID = " + AccountID.getAccountId());
+			}
+			else
+			{
+				double debitAmount = amount;
+				statement.execute("INSERT INTO TRANSACTIONS (ACCOUNTID, DATE, TYPE, AMOUNT) VALUES ("+AccountID.getAccountId()+",'"+date+"',"+((AccountID.getAccountId() == userCC)?"'Cash Advance'":"'Withdrawal'")+","+debitAmount+")");
+				statement.execute("UPDATE ACCOUNTS SET BALANCE = " + (AccountID.getBalance()+debitAmount) + " WHERE ACCOUNT_ID = " + AccountID.getAccountId());
+			}
+			return null;
+
+		} catch (SQLException e) {
+			return "Transaction failed. Please try again later.";
+		}
+	}
 
 	/**
-	 * Get transaction information for the specified accounts in the date range (non-inclusive of the dates)
-	 * @param startDate
-	 * @param endDate
-	 * @param accounts
-	 * @param rowCount
-	 * @return
-	 */
+             * Get transaction information for the specified accounts in the date range (non-inclusive of the dates)
+             * @param startDate
+             * @param endDate
+             * @param accounts
+             * @param rowCount
+             * @return
+             */
 	public static Transaction[] getTransactions(String startDate, String endDate, Account[] accounts, int rowCount) throws SQLException {
 		
 		if (accounts == null || accounts.length == 0)
