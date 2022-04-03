@@ -34,7 +34,7 @@ public class Account {
 	private long accountId = -1;
 	private String accountName = null;
 	private double balance = -1;
-	private List<Stock> portfolio;
+	//private List<Holding> portfolio;
 	
 	public static Account getAccount(String accountNo) throws SQLException {
 		if (accountNo == null || accountNo.trim().length() == 0)

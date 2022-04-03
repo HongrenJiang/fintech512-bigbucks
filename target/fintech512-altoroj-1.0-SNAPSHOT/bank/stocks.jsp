@@ -39,7 +39,49 @@ IBM AltoroJ
 					<object type="application/x-shockwave-flash" data="../util/EasyStock.swf" width="550" height="750">
 					<!--<![endif]-->
 			</div>
-		</div>
+			<div class="fl" style="width: 99%;">
+
+				<form id="tForm" name="tForm" method="post" action="doStocks" onsubmit="return (confirminput(tForm));">
+
+					<h1>Trade Stocks</h1>
+
+					<table cellSpacing="0" cellPadding="1" width="100%" border="0">
+						<tr>
+							<td><strong>Action:</strong>
+							</td>
+							<td>
+								<select size="1" id="action" name="action">
+										<option value="buy"> buy </option>
+										<option value="sell"> sell </option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td><strong> Stock:</strong>
+							</td>
+							<td><input type="text" id="stockName" name="stockName"></td>
+						</tr>
+						<tr>
+							<td><strong> Amount:</strong>
+							</td>
+							<td><input type="text" id="tradeAmount" name="tradeAmount"></td>
+						</tr>
+						<tr>
+							<td colspan="3" align="center"><input type="submit" name="trade" value="Trade Stock" ID="trade"></td>
+						</tr>
+						<tr>
+							<td colspan="2">&nbsp;</td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center">
+								<span id="_ctl0__ctl0_Content_Main_postResp" align="center"><span style='color: Red'><%=(request.getAttribute("message")==null)?"":request.getAttribute("message") %></span></span>
+								<span id="soapResp" name="soapResp" align="center" />
+							</td>
+						</tr>
+					</table>
+				</form>
+
+			</div>
     </td>	
 </div>
 <jsp:include page="/footer.jspf"/>   
