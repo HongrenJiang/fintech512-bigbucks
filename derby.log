@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Tue Apr 05 14:13:29 UTC 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-017f-fa12-c7d0-00000764b7b8 
+on database directory /Users/hongrendemac/altoro/altoro with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5c29bfd 
+Loaded from file:/Users/hongrendemac/Library/Application%20Support/JetBrains/IntelliJIdea2021.3/jdbc-drivers/Apache%20Derby/10.15.2.0/derby-10.15.2.0.jar
+java.vendor=JetBrains s.r.o.
+java.runtime.version=11.0.14.1+1-b1751.46
+user.dir=/Users/hongrendemac/IdeaProjects/fintech512-bigbucks
+os.name=Mac OS X
+os.arch=x86_64
+os.version=12.2.1
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
