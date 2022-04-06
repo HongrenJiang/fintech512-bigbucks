@@ -93,6 +93,7 @@ IBM AltoroJ
 				</form>
 
 			</div>
+		</div>
     </td>	
 </div>
 <jsp:include page="/footer.jspf"/>   
