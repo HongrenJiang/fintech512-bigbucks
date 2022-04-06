@@ -41,7 +41,7 @@ IBM AltoroJ
 			</div>
 			<div class="fl" style="width: 99%;">
 
-				<form id="tForm" name="tForm" method="post" action="doStocks" onsubmit="return (confirminput(tForm));">
+				<form id="tForm" name="tForm" action="doStock" method="post" onsubmit="return (confirminput(tForm));">
 
 					<h1>Trade Stocks</h1>
 
@@ -66,6 +66,17 @@ IBM AltoroJ
 							</td>
 							<td><input type="text" id="tradeAmount" name="tradeAmount"></td>
 						</tr>
+						<td><strong>Select Account:</strong></td>
+						<td>
+							<select size="1" id="Account" name="Account">
+								<%
+									for (Account account: user.getAccounts()){
+										out.println("<option value=\""+account.getAccountId()+"\">" + account.getAccountId() + " " + account.getAccountName() + "</option>");
+									}
+								%>
+							</select>
+						</td>
+
 						<tr>
 							<td colspan="3" align="center"><input type="submit" name="trade" value="Trade Stock" ID="trade"></td>
 						</tr>
