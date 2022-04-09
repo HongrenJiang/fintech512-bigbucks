@@ -754,16 +754,23 @@ public class DBUtil {
 									 double volume, double high, double low) throws SQLException {
 		Connection connection = getConnection();
 		Statement statement = connection.createStatement();
+		String dateS = date.toString();
+		String openS = String.valueOf(open);
+		String closeS = String.valueOf(close);
+		String highS = String.valueOf(high);
+		String lowS = String.valueOf(low);
+		String adjCloseS = String.valueOf(adjClose);
+		String volumeS = String.valueOf(volume);
 
 		statement.execute("INSERT INTO STOCKDATA" +
 				"(STOCK_SYMBOL, DATE, S_OPEN, S_CLOSE, S_HIGH, S_LOW, S_ADJ_CLOSE, S_VOLUME) " +
 				"VALUES" +
-				"(stockSymbol, date, open, close, high, low, adjClose, volume) " +
+				"(stockSymbol, "+dateS+", "+openS+", "+closeS+", "+highS+", "+lowS+", "+adjCloseS+", "+volumeS+") " +
 				"WHERE " +
-				"stockSymbol NOT IN " +
+				stockSymbol +" NOT IN " +
 				"SELECT STOCK_SYMBOL FROM STOCKDATA" +
 				"AND " +
-				"date NOT IN " +
+				dateS +" NOT IN " +
 				"SELECT DATE FROM STOCKDATA");
 	}
 
