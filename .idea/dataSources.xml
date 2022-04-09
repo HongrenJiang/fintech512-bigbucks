@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="altoro" uuid="5a3c1acf-35c5-4e63-a693-5b9a7010d812">
+    <data-source source="LOCAL" name="altoro" uuid="2c6f9dac-bbaf-4c97-b52c-55c3aaedd7f0">
       <driver-ref>derby.embedded</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.apache.derby.jdbc.EmbeddedDriver</jdbc-driver>

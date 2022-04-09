@@ -192,7 +192,7 @@
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>StockServlet</servlet-name>
-    <url-pattern>/bank/doStock</url-pattern>
+    <url-pattern>/bank/doStocks</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>AccountViewServlet</servlet-name>

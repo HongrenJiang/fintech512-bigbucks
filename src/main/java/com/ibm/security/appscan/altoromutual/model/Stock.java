@@ -1,3 +1,4 @@
+/*
 package com.ibm.security.appscan.altoromutual.model;
 
 import java.sql.Timestamp;
@@ -82,5 +83,5 @@ public class Stock {
         this.volume = volume;
     }
 }
-
+*/
 
