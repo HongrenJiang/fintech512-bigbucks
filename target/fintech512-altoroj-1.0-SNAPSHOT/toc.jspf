@@ -42,7 +42,7 @@ IBM AltoroJ
             <li><a id="MenuHyperLink12" href="index.jsp?content=business_other.htm">Other Services</a></li>
         </ul>
 
-        <a id="CatLink3" class="subheader" href="index.jsp?content=inside.htm">INSIDE ALTORO MUTUAL</a>
+        <a id="CatLink3" class="subheader" href="index.jsp?content=inside.htm">INSIDE BigBucks MUTUAL</a>
         <ul class="sidebar">
             <li><a id="MenuHyperLink13" href="index.jsp?content=inside_about.htm">About Us</a></li>
             <li><a id="MenuHyperLink14" href="index.jsp?content=inside_contact.htm">Contact Us</a></li>

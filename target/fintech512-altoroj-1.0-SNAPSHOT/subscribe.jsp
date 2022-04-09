@@ -30,7 +30,7 @@ IBM AltoroJ
 
 			<h1>Subscribe</h1>
 			
-			<p>We recognize that things are always evolving and changing here at Altoro Mutual.
+			<p>We recognize that things are always evolving and changing here at BigBucks Mutual.
 			Please enter your email below and we will automatically notify of noteworthy events.</p>
 			
 			<form action="doSubscribe" method="post" name="subscribe" id="subscribe" onsubmit="return confirmEmail(txtEmail.value);">
