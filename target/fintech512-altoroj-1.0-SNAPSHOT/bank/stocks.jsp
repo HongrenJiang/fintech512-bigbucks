@@ -1,5 +1,6 @@
+<%@ page import="com.ibm.security.appscan.altoromutual.model.Account" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+		 pageEncoding="ISO-8859-1"%>
 
 <%
 /**
@@ -26,6 +27,11 @@ IBM AltoroJ
 <div id="wrapper" style="width: 99%;">
 	<jsp:include page="membertoc.jspf"/>
     <td valign="top" colspan="3" class="bb">
+		<%@page import="com.ibm.security.appscan.altoromutual.model.Account"%>
+		<%
+			com.ibm.security.appscan.altoromutual.model.User user = (com.ibm.security.appscan.altoromutual.model.User)request.getSession().getAttribute("user");
+		%>
+
 		<div class="fl" style="width: 99%;">
 			<div style="display:inline;">
 				<script type="text/javascript" src="../util/swfobject.js"></script>
@@ -47,10 +53,22 @@ IBM AltoroJ
 
 					<table cellSpacing="0" cellPadding="1" width="100%" border="0">
 						<tr>
+							<td><strong>Choose Account</strong></td>
+							<td>
+								<select size="1" id="chooseAccount" name="chooseAccount">
+									<%
+										for (Account account: user.getAccounts()){
+											out.println("<option value=\""+account.getAccountId()+"\" >" + account.getAccountId() + " " + account.getAccountName() + "</option>");
+										}
+									%>
+								</select>
+							</td>
+						</tr>
+						<tr>
 							<td><strong>Action:</strong>
 							</td>
 							<td>
-								<select size="1" id="action" name="action">
+								<select size="1" id="tradeType" name="tradeType">
 										<option value="buy"> buy </option>
 										<option value="sell"> sell </option>
 								</select>
@@ -59,7 +77,7 @@ IBM AltoroJ
 						<tr>
 							<td><strong> Stock:</strong>
 							</td>
-							<td><input type="text" id="stockName" name="stockName"></td>
+							<td><input type="text" id="stockSymbol" name="stockSymbol"></td>
 						</tr>
 						<tr>
 							<td><strong> Amount:</strong>

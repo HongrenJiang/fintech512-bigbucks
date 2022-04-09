@@ -1,9 +1,8 @@
-/*
 package com.ibm.security.appscan.altoromutual.model;
 
 import java.sql.Timestamp;
 
-public class Stock {
+public class StockData {
     String stockSymbol;
     Timestamp date;
     double open;
@@ -13,7 +12,7 @@ public class Stock {
     double adjClose;
     double volume;
 
-    public Stock(String stockSymbol, Timestamp date, double open, double close, double high,
+    public StockData(String stockSymbol, Timestamp date, double open, double close, double high,
                  double low, double adjClose, double volume) {
         this.stockSymbol = stockSymbol;
         this.date = date;
@@ -83,5 +82,4 @@ public class Stock {
         this.volume = volume;
     }
 }
-*/
 
