@@ -15,8 +15,8 @@ import com.ibm.security.appscan.altoromutual.util.OperationsUtil;
 public class TransferAPI extends AltoroAPI {
 	
 	@POST
-	public Response trasnfer(String bodyJSON,
-			@Context HttpServletRequest request) {
+	public Response transfer(String bodyJSON,
+							 @Context HttpServletRequest request) {
 		
 		JSONObject myJson = new JSONObject();
 		Long creditActId;
