@@ -765,12 +765,12 @@ public class DBUtil {
 		statement.execute("INSERT INTO STOCKDATA" +
 				"(STOCK_SYMBOL, DATE, S_OPEN, S_CLOSE, S_HIGH, S_LOW, S_ADJ_CLOSE, S_VOLUME) " +
 				"VALUES" +
-				"(stockSymbol, "+date+", "+open+", "+close+", "+high+", "+low+", "+adjClose+", "+volume+") " +
+				"(stockSymbol, "+dateS+", "+openS+", "+closeS+", "+highS+", "+lowS+", "+adjCloseS+", "+volumeS+") " +
 				"WHERE " +
 				stockSymbol +" NOT IN " +
 				"SELECT STOCK_SYMBOL FROM STOCKDATA" +
 				"AND " +
-				date +" NOT IN " +
+				dateS +" NOT IN " +
 				"SELECT DATE FROM STOCKDATA");
 	}
 
