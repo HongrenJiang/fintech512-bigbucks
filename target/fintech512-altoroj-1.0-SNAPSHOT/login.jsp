@@ -71,12 +71,12 @@ IBM AltoroJ
 		        </td>
 			</tr>
 
-			<tr>
-				<td></td>
-				<td>
-					<a href="signup.jsp">Signup</a>
-				</td>
-			</tr>
+<%--			<tr>--%>
+<%--				<td></td>--%>
+<%--				<td>--%>
+<%--					<a href="signup.jsp">Signup</a>--%>
+<%--				</td>--%>
+<%--			</tr>--%>
 		  </table>
 		</form>
 		

@@ -21,11 +21,7 @@
 
         <script type="text/javascript">
 
-            function confirminput(myform){
-                var stock1=document.getElementById("stockSymbol").value;
-                var stock2=document.getElementById("stockSymbol").value;
-                return true;
-            }
+
 
         </script>
 

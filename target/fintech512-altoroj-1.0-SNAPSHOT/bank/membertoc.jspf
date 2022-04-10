@@ -39,7 +39,7 @@ response.setHeader("Pragma","no-cache");
 			<li><a id="MenuHyperLink8" href="<%=request.getContextPath()%>/bank/charts.jsp">View Charts</a></li>
 			<li><a id="MenuHyperLink3" href="<%=request.getContextPath()%>/bank/transfer.jsp">Transfer Funds</a></li>
 	 		<li><a id="MenuHyperLink6" href="<%=request.getContextPath()%>/bank/stocks.jsp">Trade Stocks</a></li>
-	 		<% String specialLink = ServletUtil.getAppProperty("specialLink"); %> 
+<%--	 		<% String specialLink = ServletUtil.getAppProperty("specialLink"); %> --%>
 <%--            <li><a id="MenuHyperLink4" href="<%=(specialLink != null && specialLink.length()>0)? specialLink : (request.getContextPath()+"/bank/queryxpath.jsp")%>">Search News Articles</a></li>--%>
 <%--            <li><a id="MenuHyperLink5" href="<%=request.getContextPath()%>/bank/customize.jsp">Customize Site Language</a></li>--%>
 
