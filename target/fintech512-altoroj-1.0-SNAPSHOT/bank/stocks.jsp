@@ -58,7 +58,7 @@ IBM AltoroJ
 								<select size="1" id="chooseAccount" name="chooseAccount">
 									<%
 										for (Account account: user.getAccounts()){
-											out.println("<option value=\""+account.getAccountId()+"\" >" + account.getAccountId() + " " + account.getAccountName() + "</option>");
+											out.println("<option value=\""+account.getAccountId()+"\" >" + account.getAccountId() + "</option>");
 										}
 									%>
 								</select>

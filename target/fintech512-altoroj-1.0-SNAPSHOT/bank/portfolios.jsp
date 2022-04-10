@@ -35,8 +35,8 @@
                     <tr style="color:White;background-color:#BFD7DA;font-weight:bold;">
                         <td>Account ID</td>
                         <td>Stock Symbol</td>
-                        <td>Stock Name</td>
-                        <td>Shares Held</td>
+                        <td>Stock Amount</td>
+                        <td>Average Cost</td>
                     </tr>
                     <% for (int i=0; i<holdings.length; i++){
                         double dblPrice = holdings[i].getAverageCost();

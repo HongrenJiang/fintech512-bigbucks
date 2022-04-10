@@ -604,7 +604,7 @@ public class DBUtil {
 		Connection connection = getConnection();
 		Statement statement = connection.createStatement();
 
-		statement.execute("INSERT INTO TRADE (ACCOUNTID, DATE, TYPE, STOCKSYMBOL, STOCKNAME, TRADEAMOUNT, TRADEPRICE) " +
+		statement.execute("INSERT INTO TRADE (ACCOUNTID, DATE, TYPE, STOCKSYMBOL, TRADEAMOUNT, TRADEPRICE) " +
 				"VALUES (" + accountIDNumber + ",'" + date + "','" + tradeType + "','" + stockSymbol + "'," + tradeAmount
 				+ "," + tradePrice + ")");
 	}
@@ -615,7 +615,7 @@ public class DBUtil {
 		Connection connection = getConnection();
 		Statement statement = connection.createStatement();
 
-		statement.execute("INSERT INTO HOLDINGS (ACCOUNTID, STOCKSYMBOL, STOCKNAME, HOLDINGAMOUNT, AVERAGECOST) VALUES" +
+		statement.execute("INSERT INTO PORTFOLIO (ACCOUNTID, STOCKSYMBOL, STOCKAMOUNT, AVERAGECOST) VALUES" +
 				" (" + accountIDNumber + ",'" + stockSymbol + "'," + holdingAmount + "," + costPrice + ")");
 	}
 
@@ -637,7 +637,7 @@ public class DBUtil {
 		Connection connection = getConnection();
 		Statement statement = connection.createStatement();
 
-		statement.executeUpdate("UPDATE PORTFOLIO SET COSTPRICE = " + newPrice + " WHERE ACCOUNTID = "
+		statement.executeUpdate("UPDATE PORTFOLIO SET AVERAGECOST = " + newPrice + " WHERE ACCOUNTID = "
 					+ accountIDNumber + " AND STOCKSYMBOL = '" + stockSymbol + "' ");
 		}
 
@@ -661,21 +661,21 @@ public class DBUtil {
 		return amount;
 	}
 
-	public static int getAverageCost(long accountIDNumber, String stockSymbol) throws SQLException {
+	public static double getAverageCost(long accountIDNumber, String stockSymbol) throws SQLException {
 		Connection connection = getConnection();
 		Statement statement = connection.createStatement();
-		int amount = 0;
+		double averageCost;
 		ResultSet resultSet = statement.executeQuery("SELECT AVERAGECOST FROM PORTFOLIO WHERE ACCOUNTID = " + accountIDNumber + " AND STOCKSYMBOL = '" + stockSymbol + "' ");
 		if (resultSet.next()) {
-			amount = resultSet.getInt("AVERAGECOST");
+			averageCost = resultSet.getDouble("AVERAGECOST");
 		} else {
-			amount = -1;  // stock don't exist
+			averageCost = -1;  // stock don't exist
 		}
-		return amount;
+		return averageCost;
 	}
 
 	public static String tradeStock(String tradeAccountID, String tradeType, int tradeAmount, double tradePrice,
-									String stockSymbol, Timestamp date) {
+									String stockSymbol, Timestamp date) throws SQLException{
 		String message = null;
 		try {
 			long accountIDNumber = Long.parseLong(tradeAccountID);
@@ -721,7 +721,7 @@ public class DBUtil {
 
 				//update balance
 				updateBalance(remainBalance, tradeAccount.getAccountId());
-				//message = "Successfully buy " + tradeAccount.toString() + " " + stockSymbol;
+				message = "Successfully buy " + Integer.toString(tradeAmount) + " " + stockSymbol;
 				//get historical data
 
 			}else if (tradeType.equals("sell")) {
@@ -732,12 +732,12 @@ public class DBUtil {
 					return "Stock amount is not sufficient. Failed to sell stock!";
 				}
 
-				double remainBalance = currentBalance + volume;
+				double remainBalance = currentBalance - volume;
 				//update table TRADE
 				updateTrade(accountIDNumber, date, tradeType, stockSymbol, tradeAmount, tradePrice);
 
 				//update table PORTFOLIO
-				int newHolding = currentHolding + tradeAmount;
+				int newHolding = currentHolding - tradeAmount;
 				updatePortfolioAmount(tradeAccount.getAccountId(), stockSymbol, newHolding);
 
 				//update balance
@@ -745,7 +745,7 @@ public class DBUtil {
 
 				//get historical data
 
-				//message = "Successfully sell " + tradeAccount.toString() + " " + stockSymbol;
+				message = "Successfully sell " + Integer.toString(tradeAmount) + " " + stockSymbol;
 			}
 
 		} catch (SQLException e) {

@@ -14,6 +14,8 @@ import com.ibm.security.appscan.altoromutual.util.OperationsUtil;
 import com.ibm.security.appscan.altoromutual.util.ServletUtil;
 
 import yahoofinance.*;
+
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 @WebServlet("/StockServlet")
@@ -58,7 +60,14 @@ public class StockServlet extends HttpServlet {
         }
 
         if (message == null) {
-            message = DBUtil.tradeStock(accountIdString, tradeTypeString, tradeAmount, tradePrice, stockSymbol, date);
+            try {
+                message = DBUtil.tradeStock(accountIdString, tradeTypeString, tradeAmount, tradePrice, stockSymbol, date);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("stocks.jsp");
+                request.setAttribute("message", message);
+                dispatcher.forward(request, response);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         if (message == null) {
