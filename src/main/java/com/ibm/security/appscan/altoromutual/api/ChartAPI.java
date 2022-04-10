@@ -13,6 +13,7 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.xy.XYDotRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.chart.servlet.ServletUtilities;
 import org.jfree.chart.ui.ApplicationFrame;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.data.category.CategoryDataset;
@@ -537,12 +538,14 @@ public class ChartAPI extends ApplicationFrame {
         String stockSymbol = "AAPL";   // Here stockSymbol is gotten from the UI
         String indexSymbol = "SPY";
 
-        ChartUtils.saveChartAsPNG(new File("chart/chart1.png"), getStockPriceChart(stockSymbol), 800, 500);
-        ChartUtils.saveChartAsPNG(new File("chart/chart2.png"), getStockReturnChart(stockSymbol), 800, 500);
-        ChartUtils.saveChartAsPNG(new File("chart/chart3.png"), getStockAutoCorrChart(stockSymbol), 500, 500);
-        ChartUtils.saveChartAsPNG(new File("chart/chart4.png"), getFreqHistogram(stockSymbol), 900, 500);
-        ChartUtils.saveChartAsPNG(new File("chart/chart5.png"), getCumReturnChart(stockSymbol,indexSymbol), 800, 500);
-        ChartUtils.saveChartAsPNG(new File("chart/chart6.png"), getStockVSIndexDailyReturn(stockSymbol, indexSymbol), 800, 500);
-        ChartUtils.saveChartAsPNG(new File("chart/chart7.png"), getCAPM(stockSymbol, indexSymbol), 800, 500);
+//        ChartUtils.saveChartAsPNG(new File("chart/chart1.png"), getStockPriceChart(stockSymbol), 800, 500);
+//        ChartUtils.saveChartAsPNG(new File("chart/chart2.png"), getStockReturnChart(stockSymbol), 800, 500);
+//        ChartUtils.saveChartAsPNG(new File("chart/chart3.png"), getStockAutoCorrChart(stockSymbol), 500, 500);
+//        ChartUtils.saveChartAsPNG(new File("chart/chart4.png"), getFreqHistogram(stockSymbol), 900, 500);
+//        ChartUtils.saveChartAsPNG(new File("chart/chart5.png"), getCumReturnChart(stockSymbol,indexSymbol), 800, 500);
+//        ChartUtils.saveChartAsPNG(new File("chart/chart6.png"), getStockVSIndexDailyReturn(stockSymbol, indexSymbol), 800, 500);
+//        ChartUtils.saveChartAsPNG(new File("chart/chart7.png"), getCAPM(stockSymbol, indexSymbol), 800, 500);
+        String chart = ServletUtilities.saveChartAsPNG(ChartAPI.getCAPM(stockSymbol, indexSymbol),800,500,null);
+        System.out.println(chart);
     }
 }

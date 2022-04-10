@@ -77,6 +77,19 @@
   </servlet>
   <servlet>
     <description>
+    </description>
+    <display-name>
+      ChartsServlet</display-name>
+    <servlet-name>ChartsServlet</servlet-name>
+    <servlet-class>
+      com.ibm.security.appscan.altoromutual.servlet.ChartsServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DisplayChart</servlet-name>
+    <servlet-class>org.jfree.chart.servlet.DisplayChart</servlet-class>
+  </servlet>
+  <servlet>
+    <description>
 		</description>
     <display-name>
 		LoginServlet</display-name>
@@ -182,6 +195,15 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/logout.jsp</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ChartsServlet</servlet-name>
+    <url-pattern>/chart</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DisplayChart</servlet-name>
+    <url-pattern>/DisplayChart</url-pattern>
+  </servlet-mapping>
+
   <servlet-mapping>
     <servlet-name>AccountViewServlet</servlet-name>
     <url-pattern>/bank/showAccount</url-pattern>
