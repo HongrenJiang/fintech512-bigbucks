@@ -37,7 +37,7 @@ IBM AltoroJ
 		  </h1>
 		
 		<p>
-		  Welcome to Altoro Mutual Online.
+		  Welcome to BigBucks Mutual Online.
 		</p>
 		
 		<form name="details" method="get" action="showAccount">
@@ -56,7 +56,7 @@ IBM AltoroJ
 		    </td>
 		  </tr>
 		  <tr>
-		    <td colspan="2"><span id="_ctl0__ctl0_Content_Main_promo"><table width=590 border=0><tr><td><h2>Congratulations! </h2></td></tr><tr><td>You have been pre-approved for an Altoro Gold Visa with a credit limit of $10000!</td></tr><tr><td>Click <a href='apply.jsp'>Here</a> to apply.</td></tr></table></span></td>
+		    <td colspan="2"><span id="_ctl0__ctl0_Content_Main_promo"><table width=590 border=0><tr><td><h2>Congratulations! </h2></td></tr><tr><td>You have been pre-approved for an BigBucks Gold Visa with a credit limit of $10000!</td></tr><tr><td>Click <a href='apply.jsp'>Here</a> to apply.</td></tr></table></span></td>
 		  </tr>
 		</table>
 		</form>

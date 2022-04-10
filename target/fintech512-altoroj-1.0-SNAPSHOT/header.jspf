@@ -39,14 +39,17 @@ IBM AltoroJ
 		  <tr>
 		      <td rowspan="2"><a id="HyperLink1" href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/BigBucks_logo.jpeg" width=283 height=80/></a></td>
 			  <td align="right" valign="top">
-  			  <a id="LoginLink" href="<%=(!loggedIn)?request.getContextPath()+"/login.jsp":request.getContextPath()+"/logout.jsp"%>"><font style="font-weight: bold; color: red;"><%=(!loggedIn)?"Sign In":"Sign Off"%></font></a> | <a id="HyperLink3" href="<%=request.getContextPath()%>/index.jsp?content=inside_contact.htm">Contact Us</a> | <a id="HyperLink4" href="<%=request.getContextPath()%>/feedback.jsp">Feedback</a> | <label for="txtSearch">Search</label>
+  			  <a id="LoginLink" href="<%=(!loggedIn)?request.getContextPath()+"/login.jsp":request.getContextPath()+"/logout.jsp"%>"><font style="font-weight: bold; color: red;"><%=(!loggedIn)?"Log In":"Log Off"%></font></a> |
+                  <a id="HyperLink3" href="<%=request.getContextPath()%>/index.jsp?content=inside_contact.htm">Contact Us</a> |
+                  <a id="HyperLink4" href="<%=request.getContextPath()%>/feedback.jsp">Feedback</a> |
+                  <label for="txtSearch">Search</label>
           <input type="text" name="query" id="query" accesskey="S" />
-          <input type="submit" value="Go" />
+          <input type="submit" value="Go" />x
 			  </td>
 		  </tr>
-		  <tr>
-			  <td align="right" style="background-image:url('<%=request.getContextPath()%>/images/gradient.jpg');padding:0px;margin:0px;"><img src="<%=request.getContextPath()%>/images/header_pic.jpg" alt="" width=354 height=60/></td>
-		  </tr>
+<%--		  <tr>--%>
+<%--              <td align="right" style="background-image:url('<%=request.getContextPath()%>/images/gradient.jpg');padding:0px;margin:0px;"><img src="<%=request.getContextPath()%>/images/header_pic.jpg" alt="" width=354 height=60/></td>--%>
+<%--		  </tr>--%>
 	  </table>
 	</form>
 </div>
