@@ -918,6 +918,37 @@ public class DBUtil {
 		return sharpeRatio;
 	}
 
+	public static ArrayList<StockData> getHistoryData(String stockSymbol)  {
+		// get 5 year historical data for a stock
+		Calendar from = Calendar.getInstance();
+		Calendar to = Calendar.getInstance();
+		from.add(Calendar.YEAR , -5);
+
+		ArrayList<StockData> historyData = new ArrayList<StockData>();
+
+		try {
+			Stock stock = YahooFinance.get(stockSymbol);
+			List<HistoricalQuote> quotes = stock.getHistory(from, to, Interval.DAILY);
+			for (HistoricalQuote hq: quotes) {
+				//do something
+
+				Timestamp date = new Timestamp(hq.getDate().getTimeInMillis());
+				double adjClose = hq.getAdjClose().doubleValue();
+				double open = hq.getOpen().doubleValue();
+				double close = hq.getClose().doubleValue();
+				double high = hq.getHigh().doubleValue();
+				double low = hq.getLow().doubleValue();
+				double volume = hq.getVolume().doubleValue();
+
+				StockData sd = new StockData(stockSymbol, date, open, close, high, low, adjClose, volume);
+				historyData.add(sd);
+			}
+		} catch (IOException e) {
+			Log4AltoroJ.getInstance().logError("Unable to load stock data("+stockSymbol+"): "+e);
+		}
+
+		return historyData;
+	}
 }
 
 
