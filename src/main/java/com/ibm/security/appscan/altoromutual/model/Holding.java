@@ -21,14 +21,12 @@ public class Holding {
         return stockAmount;
     }
 
-    public void buyStock(int buyAmount, double stockPrice) {
-        this.averageCost = (this.averageCost * this.stockAmount + buyAmount * stockPrice)/(this.stockAmount + buyAmount);
-        this.stockAmount += buyAmount;
+    public long getAccountId() {
+        return accountId;
     }
 
-    // When you sell, the price you sell at does not matter for the determination of your average cost.
-    public void sellStock(int sellAmount) {
-        this.stockAmount -= sellAmount;
+    public double getAverageCost() {
+        return averageCost;
     }
 }
 

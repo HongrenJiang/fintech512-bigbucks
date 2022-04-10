@@ -34,11 +34,10 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import java.lang.Math;
+
 import com.ibm.security.appscan.Log4AltoroJ;
-import com.ibm.security.appscan.altoromutual.model.Account;
-import com.ibm.security.appscan.altoromutual.model.Feedback;
-import com.ibm.security.appscan.altoromutual.model.Transaction;
-import com.ibm.security.appscan.altoromutual.model.User;
+import com.ibm.security.appscan.altoromutual.model.*;
 import com.ibm.security.appscan.altoromutual.model.User.Role;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
@@ -785,6 +784,125 @@ public class DBUtil {
 			e.printStackTrace();
 		}
 	}
+
+	public static Holding[] getPortfolio(Account[] accounts) throws SQLException {
+		if (accounts == null || accounts.length == 0) {
+			return null;
+		}
+
+		Connection connection = getConnection();
+		Statement statement = connection.createStatement();
+
+		StringBuffer acctIds = new StringBuffer();
+		acctIds.append("ACCOUNTID = " + accounts[0].getAccountId());
+		for (int i = 1; i < accounts.length; i++) {
+			acctIds.append(" OR ACCOUNTID = " + accounts[i].getAccountId());
+		}
+
+		String query = "SELECT * FROM PORTFOLIO WHERE (" + acctIds.toString() + ") AND STOCKAMOUNT != 0 ORDER BY ACCOUNTID";
+		ResultSet resultSet = null;
+		try {
+			resultSet = statement.executeQuery(query);
+		} catch (SQLException e) {
+			throw e;
+		}
+		ArrayList<Holding> holdings = new ArrayList<>();
+		while (resultSet.next()) {
+			long actId = resultSet.getLong("ACCOUNTID");
+			String stockSymbol = resultSet.getString("STOCKSYMBOL");
+			int amount = resultSet.getInt("STOCKAMOUNT");
+			double price = resultSet.getDouble("AVERAGECOST");
+			holdings.add(new Holding(actId, stockSymbol, amount, price));
+		}
+		return holdings.toArray(new Holding[holdings.size()]);
+	}
+
+	public static ArrayList<Double> getPortfolioValue(Account[] accounts) throws SQLException {
+		Holding[] portfolio = getPortfolio(accounts);
+		ArrayList<Double> portfolioValue = new ArrayList<Double>();
+
+		Connection connection = getConnection();
+		Statement statement = connection.createStatement();
+
+		int count = 0;
+
+		for (Holding hd:portfolio) {
+			ArrayList<Double> pricexAmount = new ArrayList<Double>();
+			String query = "SELECT ADJ_CLOSE FROM STOCKDATA WHERE STOCK_SYMBOL = '" + hd.getStockSymbol() +
+					"' ORDER BY DATE ASC";
+			ResultSet rs = statement.executeQuery(query);
+			int amount = hd.getStockAmount();
+			while (rs.next()) {
+				double adjPrice = rs.getDouble("ADJ_CLOSE");
+				double value = adjPrice * amount;
+				pricexAmount.add(value);
+			}
+			if (count == 0) {
+				for (int i = 0; i < pricexAmount.size(); i++) {
+					portfolioValue.add(pricexAmount.get(i));
+				}
+			} else {
+				for (int i = 0; i < pricexAmount.size(); i++) {
+					double pricexAmountElement = portfolioValue.get(i) + pricexAmount.get(i);
+					portfolioValue.set(i, pricexAmountElement);
+				}
+			}
+			count++;
+		}
+
+		return portfolioValue;
+	}
+
+	public static ArrayList<Double> percentChange(ArrayList<Double> prices) {
+		ArrayList<Double> percentChange = new ArrayList<Double>();
+		for (int i = 0; i < prices.size() - 1; i++) {
+			double dailyReturn = prices.get(i+1) / prices.get(i) - 1;
+			percentChange.add(dailyReturn);
+		}
+		return percentChange;
+	}
+
+	public static double averageCalculation(ArrayList<Double> marks) {
+		double sum = 0;
+		if(!marks.isEmpty()) {
+			for (double mark : marks) {
+				sum += mark;
+			}
+			return sum / marks.size();
+		}
+		return sum;
+	}
+
+	public static double stdDev (ArrayList<Double> table)
+	{
+		double mean = averageCalculation(table);
+		double temp = 0;
+		for (int i = 0; i < table.size(); i++)
+		{
+			double val = table.get(i);
+			double squrDiffToMean = Math.pow(val - mean, 2);
+			temp += squrDiffToMean;
+		}
+		double meanOfDiffs =  temp / (double) (table.size());
+		return Math.sqrt(meanOfDiffs);
+	}
+
+	public static double getSharpeRatio(ArrayList<Double> portfolioValue) throws IOException {
+		double sharpeRatio;
+		ArrayList<Double> dailyReturns = percentChange(portfolioValue);
+		double dailyReturnMean = averageCalculation(dailyReturns);
+		double yearlyReturn = dailyReturnMean * 252 * 100;
+
+		double dailyVolatility = stdDev(dailyReturns);
+		double yearlyVolatility = dailyVolatility * Math.sqrt(252) * 100;
+
+		double rf = YahooFinance.get("^TNX").getQuote().getPrice().doubleValue();
+
+		sharpeRatio = (yearlyReturn - rf) / yearlyVolatility;
+
+		return sharpeRatio;
+	}
+
 }
 
 
