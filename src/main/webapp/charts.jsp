@@ -8,10 +8,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 
-<jsp:include page="/header.jspf"/>
+<jsp:include page="header.jspf"/>
 
 <div id="wrapper" style="width: 99%;">
-    <jsp:include page="membertoc.jspf"/>
+    <jsp:include page="bank/membertoc.jspf"/>
     <td valign="top" colspan="3" class="bb">
         <div class="fl" style="width: 99%;">
             <script type="text/javascript">
@@ -63,4 +63,4 @@
 </div>
 
 
-<jsp:include page="/footer.jspf"/>
+<jsp:include page="footer.jspf"/>

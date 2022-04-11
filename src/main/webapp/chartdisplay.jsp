@@ -8,13 +8,16 @@
 <%@page import="com.ibm.security.appscan.altoromutual.api.ChartAPI"%>
 <%@ page import="org.jfree.chart.servlet.ServletUtilities" %>
 <%@ page import="org.jfree.chart.JFreeChart" %>
+<%@ page import="org.jfree.chart.ChartUtils" %>
+<%@ page import="java.io.File" %>
+<%@ page import="static com.ibm.security.appscan.altoromutual.api.ChartAPI.*" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
-<jsp:include page="/header.jspf"/>
+<jsp:include page="header.jspf"/>
 
 
 <div id="wrapper" style="width: 99%;">
-    <jsp:include page="membertoc.jspf"/>
+    <jsp:include page="bank/membertoc.jspf"/>
     <td valign="top" colspan="3" class="bb">
         <div class="fl" style="width: 99%;">
             <%
@@ -57,12 +60,14 @@
                 }
             %>
             <h1><%=title%></h1>
+            <form method="post" name="chart" action="bank/chart" id="chart">
+                <input type="submit" value="Back to Chart">
+            </form>
             <img src="DisplayChart?filename=<%=chart%>" alt="API Exceeds Limit" width="600" height="400" />
-            <form method="post" name="chart" action="chart" id="chart">
-                <input type="submit" value="Back to Chart" name="backButton">
+            <input type="submit" value="Back to Chart" name="backButton">
             </form>
         </div>
     </td>
 </div>
-<jsp:include page="/footer.jspf"/>
+<jsp:include page="footer.jspf"/>
 
