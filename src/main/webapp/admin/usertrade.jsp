@@ -23,9 +23,17 @@
     <%@ page import="java.sql.Timestamp" %>
     <%@ page import="java.text.SimpleDateFormat" %>
     <%@ page import="java.util.ArrayList" %>
+    <%
+      String error = "";
+      Account[] allAccountsSP = DBUtil.getAllAccounts();
+      ArrayList<Double> portfolioValueSP = DBUtil.getPortfolioValue(allAccountsSP);
+      double sharpeRatioSP = DBUtil.getSharpeRatio(portfolioValueSP);
+      String sharpeRatioStrSP = "Overall Sharpe Ratio is " + String.format("%.2f", sharpeRatioSP);
+    %>
 
 
     <div class="fl" style="width: 99%;">
+      <h1><%=sharpeRatioStrSP%></h1>
       <h1>Users Summary</h1>
       <%--      <form id="trades" name="trades" method="post" action="/admin/viewTrade">--%>
       <%--        <table width="700" border="0" style="padding-bottom:10px;">--%>
