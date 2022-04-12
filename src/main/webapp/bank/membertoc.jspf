@@ -52,6 +52,7 @@ response.setHeader("Pragma","no-cache");
 				<li><a href="<%=request.getContextPath()%>/admin/admin.jsp">Edit Users</a></li>
 			 <% if (ServletUtil.getAppProperty("enableFeedbackRetention").equalsIgnoreCase("true")){ %>
 				<li><a href="<%=request.getContextPath()%>/admin/feedbackReview.jsp">Review Feedback</a></li>
+				<li><a href="<%=request.getContextPath()%>/admin/usertrade.jsp">Review User Trades</a></li>
 			<% } %>
 			</ul>
 		</span>

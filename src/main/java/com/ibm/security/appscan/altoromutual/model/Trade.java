@@ -48,9 +48,9 @@ public class Trade {
         return date;
     }
 
-    //public String getStockSymbol() {
-    // return stockSymbol;
-    // }
+    public String getStockSymbol() {
+     return stockSymbol;
+     }
 
     /*
     public String getStockName() {

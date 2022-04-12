@@ -949,6 +949,71 @@ public class DBUtil {
 
 		return historyData;
 	}
+
+	public static Account[] getAllTradeAccounts() throws SQLException {
+		Connection connection = getConnection();
+		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery("SELECT DISTINCT ACCOUNTID FROM PORTFOLIO ORDER BY ACCOUNTID ASC");
+		ArrayList<Account> accounts = new ArrayList<>();
+		while (resultSet.next()) {
+			Account account = getAccount(resultSet.getLong("ACCOUNTID"));
+			accounts.add(account);
+		}
+		return accounts.toArray(new Account[accounts.size()]);
+	}
+
+	public static Trade[] getTradeRecords(String startDate, String endDate, Account[] accounts, int rowCount) throws SQLException {
+		if (accounts == null || accounts.length == 0) {
+			return null;
+		}
+
+		Connection connection = getConnection();
+		Statement statement = connection.createStatement();
+
+		if (rowCount > 0)
+			statement.setMaxRows(rowCount);
+
+		StringBuffer acctIds = new StringBuffer();
+		acctIds.append("ACCOUNTID = " + accounts[0].getAccountId());
+		for (int i = 1; i < accounts.length; i++) {
+			acctIds.append(" OR ACCOUNTID = " + accounts[i].getAccountId());
+		}
+
+		String dateString = null;
+
+		if (startDate != null && startDate.length() > 0 && endDate != null && endDate.length() > 0) {
+			dateString = "DATE BETWEEN '" + startDate + " 00:00:00' AND '" + endDate + " 23:59:59'";
+		} else if (startDate != null && startDate.length() > 0) {
+			dateString = "DATE > '" + startDate + " 00:00:00'";
+		} else if (endDate != null && endDate.length() > 0) {
+			dateString = "DATE < '" + endDate + " 23:59:59'";
+		}
+
+		String query = "SELECT * FROM TRADE WHERE (" + acctIds.toString() + ") " + ((dateString == null) ? "" : "AND (" + dateString + ") ") + "ORDER BY DATE DESC";
+		ResultSet resultSet = null;
+		try {
+			resultSet = statement.executeQuery(query);
+		} catch (SQLException e) {
+			throw e;
+		}
+		ArrayList<Trade> trades = new ArrayList<>();
+		while (resultSet.next()) {
+			int tradeId = resultSet.getInt("TRADE_ID");
+			long actId = resultSet.getLong("ACCOUNTID");
+			Timestamp date = resultSet.getTimestamp("DATE");
+			String type = resultSet.getString("TYPE");
+			String stockSymbol = resultSet.getString("STOCKSYMBOL");
+//			String stockName = resultSet.getString("STOCKNAME");
+			int amount = resultSet.getInt("TRADEAMOUNT");
+			double price = resultSet.getDouble("TRADEPRICE");
+			trades.add(new Trade(tradeId, actId, date, type, amount, price, stockSymbol));
+		}
+
+		return trades.toArray(new Trade[trades.size()]);
+	}
+
+
+
 }
 
 

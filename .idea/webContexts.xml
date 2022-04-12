@@ -3,6 +3,7 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/admin/usertrade.jsp" value="file://$PROJECT_DIR$/src/main/webapp/admin" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/bank/portfolios.jsp" value="file://$PROJECT_DIR$/src/main/webapp/bank" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/bank/transaction.jsp" value="file://$PROJECT_DIR$/src/main/webapp/bank" />
       </map>
