@@ -9,10 +9,12 @@ import java.io.IOException;
 
 
 public class ChartsServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        doPost(request, response);
         RequestDispatcher dispatcher = request.getRequestDispatcher("charts.jsp");
         dispatcher.forward(request, response);
     }

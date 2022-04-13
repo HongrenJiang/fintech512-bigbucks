@@ -65,7 +65,7 @@ public class AccountAPI extends AltoroAPI {
 		// not checking the account number, side privilege escalation possible
 		try {
 			// Get the account balance
-			double dblBalance = getAccount(accountNo).getBalance();
+			double dblBalance = Account.getAccount(accountNo).getBalance();
 			String format = (dblBalance < 1) ? "$0.00" : "$.00";
 			String balance = new DecimalFormat(format).format(dblBalance);
 			response = "{\"balance\" : \"" + balance + "\" ,\n";

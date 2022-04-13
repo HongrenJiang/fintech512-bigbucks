@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="fintech512-bigbucks" />
         <module name="fintech512-altoroj" />
       </profile>
     </annotationProcessing>

@@ -8,3 +8,8 @@ Registered account usernames and passwords for BigBucks are as follows:
 - Weichong Zhang: will/123
 - Kunyu Liu: kl373/123
 - Hongren Jiang: hr/123
+
+Signed up accounts besides our team members:
+- abc/123
+- sophia_lliang/sophia123
+- iPhone/123
